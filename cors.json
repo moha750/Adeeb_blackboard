@@ -1,6 +1,6 @@
 [
     {
-        "origin": ["http://127.0.0.1:5500"],
+        "origin": ["https://moha750.github.io/Adeeb_blackboard/"],
         "method": ["GET"],
         "maxAgeSeconds": 3600,
         "responseHeader": ["Content-Type"]
