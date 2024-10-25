@@ -123,10 +123,3 @@ function previewImage(url) {
     `;
     document.body.appendChild(previewContainer);
 }
-
-fetch('https://firebasestorage.googleapis.com/v0/b/world-mental-health-day-72766.appspot.com/o/images%2F19ba7f13691859.562929d080e0e.jpg?alt=media&token=94173ba0-0bc4-4973-b902-b85031149ccc')
-    .then(response => response.blob())
-    .then(blob => {
-        // التعامل مع الصورة أو عرضها
-    })
-    .catch(error => console.error('Error fetching image:', error));
