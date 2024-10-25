@@ -1,6 +1,6 @@
 [
     {
-        "origin": ["https://moha750.github.io/Adeeb_blackboard/"],
+        "origin": ["*"],
         "method": ["GET"],
         "maxAgeSeconds": 3600,
         "responseHeader": ["Content-Type"]
