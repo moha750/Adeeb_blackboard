@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع كتابة الأفكار</title>
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Firebase Scripts -->
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
@@ -18,12 +20,26 @@
             <input type="text" id="ideaTitle" placeholder="اسم الفكرة" required>
             <textarea id="ideaText" placeholder="اكتب فكرتك هنا..." required></textarea>
             <input type="file" id="image" accept="image/*" required>
-            <button type="submit">إرسال</button>
+            <button type="submit">حفظ الفكرة</button>
+            
+            <!-- نص شريط التحميل -->
+            <div id="loadingText" style="display: none;">قيد التحميل...</div>
+            <div id="progressContainer" style="display: none;">
+                <div id="progressBar" style="width: 0%;"></div>
+            </div>
         </form>
-    </div>
-    
-        <div id="ideasContainer"></div>
+    </div>    
 
+    <div id="ideasContainer"></div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <p id="modalMessage">شكراً لحفظ فكرتك!</p>
+            <button onclick="closeModal()">إغلاق</button>
+        </div>
+    </div>    
+    
     <script src="script.js"></script>
 </body>
 </html>
