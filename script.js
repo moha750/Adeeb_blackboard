@@ -11,43 +11,65 @@ const firebaseConfig = {
 // تهيئة Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
-const auth = firebaseApp.auth();
 const storage = firebase.storage();
 
-
-// javascript cods
+// إعداد الحدث عند إرسال النموذج
 const form = document.getElementById('ideaForm');
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     const name = document.getElementById('name').value;
     const ideaTitle = document.getElementById('ideaTitle').value;
     const ideaText = document.getElementById('ideaText').value;
     const imageFile = document.getElementById('image').files[0];
 
-    // رفع الصورة إلى التخزين
+    // عرض شريط التحميل
+    document.getElementById('loadingText').style.display = 'block';
+    document.getElementById('progressContainer').style.display = 'block';
+
+    // رفع الصورة إلى Firebase Storage مع عرض نسبة التحميل
     const storageRef = storage.ref();
     const imageRef = storageRef.child(`images/${imageFile.name}`);
-    await imageRef.put(imageFile);
-    const imageUrl = await imageRef.getDownloadURL();
+    const uploadTask = imageRef.put(imageFile);
 
-    // حفظ البيانات في Firestore
-// حفظ البيانات في Firestore مع تضمين الوقت
-await db.collection('ideas').add({
-    name: name,
-    title: ideaTitle,
-    text: ideaText,
-    imageUrl: imageUrl,
-    timestamp: firebase.firestore.FieldValue.serverTimestamp() // تخزين الوقت
+    uploadTask.on('state_changed',
+        (snapshot) => {
+            const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressBar').textContent = Math.floor(progress) + '%'; // عرض النسبة المئوية داخل الشريط
+        },
+        (error) => {
+            console.error('Error uploading image:', error);
+        },
+        async () => {
+            const imageUrl = await uploadTask.snapshot.ref.getDownloadURL();
+
+            // حفظ البيانات في Firestore مع تضمين الوقت
+            await db.collection('ideas').add({
+                name: name,
+                title: ideaTitle,
+                text: ideaText,
+                imageUrl: imageUrl,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+
+            // إعادة تعيين النموذج بعد حفظ الفكرة
+            form.reset();
+            loadIdeas();
+
+            // إخفاء شريط التحميل
+            document.getElementById('loadingText').style.display = 'none';
+            document.getElementById('progressContainer').style.display = 'none';
+            document.getElementById('progressBar').style.width = '0%';
+            document.getElementById('progressBar').textContent = ''; // إعادة تعيين النص داخل الشريط
+
+            // عرض رسالة الشكر في نافذة منبثقة
+            showModal('شكراً لحفظ فكرتك!');
+        }
+    );
 });
 
-
-    // إعادة تعيين النموذج بعد حفظ الفكرة
-    form.reset();
-    loadIdeas();
-});
-
-// عرض الأفكار
+// دالة عرض الأفكار المحفوظة
 async function loadIdeas() {
     const ideasContainer = document.getElementById('ideasContainer');
     ideasContainer.innerHTML = '';
@@ -71,6 +93,7 @@ async function loadIdeas() {
     });
 }
 
+// دالة تحميل الصورة
 function downloadImage(url, filename) {
     fetch(url)
         .then(response => response.blob())
@@ -86,33 +109,17 @@ function downloadImage(url, filename) {
         .catch(error => console.error('Error downloading image:', error));
 }
 
-
-
-// دالة النسخ
+// دالة نسخ الفكرة
 function copyIdea(title, name, text) {
     const ideaContent = `عنوان الفكرة: ${title}\nبواسطة: ${name}\nالفكرة: ${text}`;
     navigator.clipboard.writeText(ideaContent).then(() => {
-        alert('تم نسخ الفكرة إلى الحافظة!');
+        showModal('تم نسخ الفكرة إلى الحافظة!'); // استخدم النافذة المنبثقة هنا
     }).catch(err => {
-        alert('حدث خطأ أثناء نسخ الفكرة.');
+        showModal('حدث خطأ أثناء نسخ الفكرة.');
     });
 }
 
-
 // دالة عرض الصورة في نافذة منبثقة
-function previewImage(url) {
-    const previewContainer = document.createElement('div');
-    previewContainer.classList.add('preview-container');
-    previewContainer.innerHTML = `
-        <div class="preview-overlay" onclick="this.parentElement.remove()"></div>
-        <img src="${url}" alt="Preview Image" class="preview-image">
-    `;
-    document.body.appendChild(previewContainer);
-}
-
-// تحميل الأفكار عند فتح الصفحة
-loadIdeas();
-
 function previewImage(url) {
     const previewContainer = document.createElement('div');
     previewContainer.classList.add('preview-container');
@@ -123,3 +130,17 @@ function previewImage(url) {
     `;
     document.body.appendChild(previewContainer);
 }
+
+// دالة عرض النافذة المنبثقة
+function showModal(message) {
+    document.getElementById('modalMessage').innerText = message; // تعيين الرسالة
+    document.getElementById('modal').style.display = 'block'; // عرض النافذة
+}
+
+// دالة إغلاق النافذة المنبثقة
+function closeModal() {
+    document.getElementById('modal').style.display = 'none'; // إخفاء النافذة
+}
+
+// تحميل الأفكار عند فتح الصفحة
+loadIdeas();
