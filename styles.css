@@ -11,7 +11,7 @@ body {
     background: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
@@ -23,7 +23,8 @@ form {
     flex-direction: column;
 }
 
-input, textarea {
+input,
+textarea {
     margin-bottom: 10px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -55,8 +56,8 @@ button:hover {
     padding: 20px;
     border-radius: 5px;
     margin-top: 50px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
 /* نافذة المعاينة */
 .preview-container {
@@ -138,4 +139,61 @@ button:hover {
 
 .download-button:hover {
     background-color: #45a049;
+}
+
+/* شريط التحميل */
+#progressContainer {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+#progressBar {
+    height: 20px;
+    background-color: #28a745;
+    border-radius: 5px;
+    transition: width 0.4s;
+    text-align: center;
+    color: white;
+    line-height: 20px; /* للتوسيط العمودي للنص */
+    font-weight: bold;
+}
+
+/* أنماط النافذة المنبثقة */
+.modal {
+    display: none; /* إخفاء النافذة المنبثقة بشكل افتراضي */
+    position: fixed; /* ثابتة في جميع أنحاء الصفحة */
+    z-index: 1000; /* فوق جميع العناصر الأخرى */
+    left: 0;
+    top: 0;
+    width: 100%; /* عرض كامل */
+    height: 100%; /* ارتفاع كامل */
+    overflow: auto; /* إذا كانت النافذة كبيرة جداً */
+    background-color: rgba(0, 0, 0, 0.5); /* خلفية مظللة */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* مركز المحتوى */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 500px; /* أقصى عرض */
+    height: 500px; /* أقصى عرض */
+    border-radius: 5px; /* زوايا مستديرة */
+}
+
+.close-button {
+    color: #aaa;
+    float: right; /* الزر في الزاوية العلوية اليمنى */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer; /* إشارة اليد */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
