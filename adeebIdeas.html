@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع كتابة الأفكار ولوحة عرض</title>
+    <link rel="stylesheet" href="adeebIdeas.css">
+
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-storage-compat.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js'></script>
+
+</head>
+<body> 
+    
+      <!-- londer -->
+   <div class="londer">
+    <div class="hourglass"></div>
+    </div>
+
+    <div class="blackboard">
+
+    <h1 class="title-page">هُنَا مَنبَع الأفكَارِ وَالإِلهَامِ💡✨</h1>
+    <div id="ideasContainer"></div>
+
+    <!-- نافذة منبثقة لشكر -->
+    <div id="thankYouModal" style="display: none;" class="modal">
+        <div class="modal-content">
+            <p id="thankYouMessage"></p>
+            <button class="close-popup" id="thankYouButton">صح لسانك</button>
+        </div>
+    </div>
+
+    <!-- نافذة منبثقة لنسخ الفكرة -->
+    <div id="copyModal" style="display: none;" class="modal">
+        <div class="modal-content">
+            <p id="copyMessage"></p>
+            <button class="close-popup" id="copyCloseButton">شنو جيب المكرونة🤔؟</button>
+        </div>
+    </div>
+
+    <!-- نافذة منبثقة جديدة بعد إغلاق النسخ -->
+    <div id="newModal" style="display: none;" class="modal">
+        <div class="modal-content">
+            <p> ليس كل ما يُعْرَف يُقال، وليس كل ما يُقال حَضَرَ المكرونة، وليس كل ما حَضَرَ المكرونة حان وقته، وليس كل ما حان وقته صَحَّ قوله🤫 </p>
+            <button class="close-popup" id="newModalCloseButton">يـ إللهي😳</button>
+        </div>
+    </div>
+
+    <!-- زر فتح لوحة العرض -->
+    <div class="openPanel">
+        <button class="open-form" onclick="openPanel()">حاب تشارك بفكرة🤔؟</button>
+    </div>
+
+    <!-- لوحة العرض المنبثقة -->
+    <div id="myPanel" class="panel">
+        <button class="close-btn" onclick="closePanel()">×</button>
+            <h1 class="form-title"> خذ الطبشور 🖍 </h1>
+            <p class="form-suptitle">  واكتب فكرتك المبهرة ✨ </p>
+            <form class="formField" id="ideaForm">
+                <input type="text" id="ideaTitle" placeholder="عنوان الفكرة 💡" required>
+                <textarea id="ideaText" placeholder=" ...اشرحها لنا 📝    " required></textarea>
+                <input type="text" id="name" placeholder=" صاحب الفكرة الرهيبة ✨" required>
+                <input type="file" id="image" accept="image/*">
+                <button class="send" type="submit">أطلق العنان لفكرتك</button>
+                
+                <!-- نص شريط التحميل -->
+                <div id="loadingText" style="display: none;"> لإنه إبداعك له وزن، عطه وقت حتى يوصلنا⏳ </div>
+                <div id="progressContainer" style="display: none;">
+                    <div id="progressBar" style="width: 0%;"></div>
+                </div>
+            </form>
+        </div>   
+</div>
+    <script src="adeebIdeas.js"></script>
+</body>
+</html>

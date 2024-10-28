@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Chalk for Blackboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- londer -->
+   <div class="londer">
+<div class="hourglass"></div>
+</div>
+
+  <div class="bg-board">
+    <div class="blackboard">
+
+      <div class="titles">
+        <img src="logo.png" alt="">
+        <img src="date.png" alt="">
+      </div>
+
+      <div class="main">
+        <img class="main-logo" src="blackboard.png" alt="">
+        <hr>
+        <a href="adeebIdeas.html"><img class="ideas" src="adeeb ideas.png" alt=""></a>
+        <hr>
+        <img  class="ideas" src="Eastern creativity.png" alt="">
+        <hr>
+        <img class="ideas" src="Arabic.png" alt="">
+      </div>
+
+    </div>
+  </div>
+
+<!-- الخلفية السوداء الخفيفة -->
+<div id="overlay" class="overlay"></div>
+
+<!-- النافذة المنبثقة -->
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <h1>شلون يعني! ليه حاطين لك قفل🦦؟</h1>
+    <button onclick="showThankYouPopup()"> 😬إن شاء الله ما راح اعيدها </button>
+  </div>
+</div>
+
+<!-- نافذة الشكر الإضافية -->
+<div id="thankYouPopup" class="popup">
+  <div class="popup-content">
+    <h1> 👏🏻👏🏻👏🏻شاطر، تستاهل صفقة </h1>
+    <button onclick="closeThankYouPopup()">شُكرًا</button>
+  </div>
+</div>
+
+
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js'></script>
+  <script src="script.js"></script>
+</body>
+</html>
