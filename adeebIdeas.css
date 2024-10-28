@@ -83,7 +83,7 @@ body {
     content: '';
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 2vw;
     display: block;
     position: absolute;
     left: 0;
@@ -93,7 +93,7 @@ body {
   }
   @keyframes pulse-animation {
     0% {
-      box-shadow: 0 0 0 0px #4a8364;
+      box-shadow: 0 0 0 0px #ffffff;
     }
     100% {
       box-shadow: 0 0 0 22px rgb(7, 85, 149, 0.0);
@@ -332,6 +332,8 @@ button:hover {
     padding: 10px 20px;
     font-size: 4vw;
     cursor: pointer;
+    background-color: #fff;
+    color: #4a8364;
 }
 
 .panel {
