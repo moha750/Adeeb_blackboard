@@ -1,6 +1,6 @@
-// window.addEventListener("load", () =>{
-//     document.querySelector(".londer").classList.add("londer--hidden");
-// });
+window.addEventListener("load", () =>{
+    document.querySelector(".londer").classList.add("londer--hidden");
+});
 
 // إعداد Firebase
 const firebaseConfig = {
