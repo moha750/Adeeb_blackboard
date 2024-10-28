@@ -1,6 +1,6 @@
-// window.addEventListener("load", () =>{
-//     document.querySelector(".londer").classList.add("londer--hidden");
-// });
+window.addEventListener("load", () =>{
+    document.querySelector(".londer").classList.add("londer--hidden");
+});
 
 // فتح النافذة وتجميد الصفحة عند النقر على الصور المحددة
 document.querySelectorAll('img[src="Eastern creativity.png"], img[src="Arabic.png"]').forEach(img => {
