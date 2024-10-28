@@ -1,0 +1,74 @@
+* {
+	padding: 0;
+	margin: 0;
+  }
+  
+  body {
+	background: gray;
+  }
+
+  .bg-board {
+	background: gray;
+	display: flex; /* استخدام الفلكس */
+	justify-content: center; /* محاذاة العناصر في المنتصف أفقياً */
+	align-items: center; /* محاذاة العناصر في المنتصف عمودياً */
+  }
+  
+  .blackboard {
+	width: auto;
+	height: auto;
+	background-image: 
+	  radial-gradient(circle at left 30%, 
+	  rgba(68, 88, 78, 0.2), 
+	  rgba(68, 88, 78, 0.2) 80px, 
+	  rgba(68, 88, 78, 0.3) 100px, 
+	  rgba(62, 82, 72, 0.3) 160px, 
+	  rgba(62, 82, 72, 0.3)), 
+	  linear-gradient(215deg, transparent, transparent 100px, 
+	  rgba(73,92,81,0.4) 260px, rgba(73,92,81,0.4) 320px, transparent), 
+	  radial-gradient(circle at right, rgba(77,97,87,0.4), rgba(77, 97, 87, 0.5)),
+	  linear-gradient(0deg, rgba(76,93,84,.5), rgba(76,93,84,.2) 70%);
+	background-color: rgba(74, 131, 100, 0.8);
+	border: tan solid 12px;
+	border-top: #bda27e solid 12px;
+	border-left: #b19876 solid 12px;
+	border-bottom: #c9ad86 solid 12px;
+	box-shadow: 0px 0px 6px 5px rgba(58, 18, 13, 0), 
+	  0px 0px 0px 2px #c2a782, 0px 0px 0px 4px #a58e6f, 
+	  3px 4px 8px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  .titles {
+	display: flex;
+	justify-content: space-between;
+	padding: 1vw;
+  }
+
+  img {
+	width: 40%;
+  }
+
+  .main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+  }
+
+  .main-logo {
+	width: 75%;
+	margin: 3% 0px;
+  }
+
+  .ideas {
+	width: 60%;
+  }
+
+  hr {
+	width: 85%;
+	border: 0.3vw solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+  }
+
+  a {
+	text-align: center;
+  }
