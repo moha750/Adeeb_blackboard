@@ -106,17 +106,26 @@ async function loadIdeas() {
                 ${idea.imageUrls && idea.imageUrls.length > 0 ? `
                     <div class="image-gallery">
                         ${idea.imageUrls.map(url => 
-                            `<img src="${url}" class="gallery-image" alt="Idea Image" onclick="previewImage('${url}')">`
+                            `<div>
+                                <img src="${url}" class="gallery-image" alt="Idea Image" style="max-width: 100%; cursor: pointer;" onclick="previewImage('${url}')">
+                                <button class="download-btn" onclick="downloadImage('${url}')">📥</button>
+                            </div>`
                         ).join('')}
                     </div>
                 ` : ''}
+                
+                
                                 <p style="color: white; font-family: r; font-size:4.5vw; margin-top:5vw;"> بِريشة المُبدع/ـه: ${idea.name}</p>
                 <p style="color: white; font-family: l; font-size:3.5vw; margin:2.5vw 0vw;"> حُفظت التُحفة في: ${timestamp}</p>
                 <button onclick="copyIdea('${idea.title}', '${idea.name}', '${idea.text}')">نسخ الفكرة</button>
             </div>
         `;
+        
     });
+    
 }
+
+
 
 // دالة عرض الصورة في نافذة منبثقة
 function previewImage(url) {
@@ -165,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loadIdeas();
+    
 });
 
 // دالة إغلاق نافذة الشكر
@@ -186,4 +196,32 @@ function openPanel() {
 
 function closePanel() {
     document.getElementById("myPanel").style.height = "0";
+}
+
+function showCopyModal(message) {
+    document.getElementById('copyMessage').innerText = message;
+    document.getElementById('copyModal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCopyModal() {
+    document.getElementById('copyModal').style.display = 'none';
+    document.getElementById('newModal').style.display = 'flex'; // عرض النافذة الجديدة
+    document.body.style.overflow = ''; 
+}
+
+function downloadImage(url) {
+    fetch(url)
+        .then(response => response.blob())  // تحويل الصورة إلى ملف Blob
+        .then(blob => {
+            const a = document.createElement('a');
+            const objectURL = URL.createObjectURL(blob);
+            a.href = objectURL;
+            a.download = 'idea_image.jpg'; // تحديد اسم الملف
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(objectURL); // تحرير الذاكرة بعد التنزيل
+        })
+        .catch(error => console.error('خطأ أثناء تحميل الصورة:', error));
 }
